@@ -23,7 +23,22 @@ export default function App() {
             <Text style={styles.innerText}> and red</Text>
           </Text>
         </View>
-        <View style={styles.middle}></View>
+        <View style={styles.middle}>
+          <TextInput
+            style={{
+              backgroundColor: "pink",
+              width: 300,
+              borderRadius: 20,
+              padding: 4,
+              fontSize: 20,
+            }}
+            placeholder="Type here..."
+            onFocus={()=>console.log("Focused")}
+            onBlur={()=>console.log("Blurred")}
+            placeholderTextColor={"grey"}
+            onChangeText={(val) => console.log(val)}
+          ></TextInput>
+        </View>
         <View style={styles.bottom}>
           <Image
             onLoad={() => setIsLoaded(true)}
@@ -71,6 +86,7 @@ const styles = StyleSheet.create({
     flex: 0.3,
     backgroundColor: "beige",
     borderWidth: 5,
+    alignItems: "center",
   },
   bottom: {
     flex: 0.3,
@@ -108,4 +124,15 @@ onLoad{()=>function} as onError
 defaultSource=> ignored in debug mode
 blurRaduis={3} local or url {require('imageLinkFromAssets')}
 accessibilityLabel"Image"
+*/
+/*
+TextInput Important Props  <TextInput><TextInput/>
+value:"text" cannot change it 
+defaultValue: can change it 
+placeHolder & placeHolderTextColor
+onChangText, OnBlue Vs OnFocus
+maxLength letters in the input
+multiline for the overflow text {true/false}\
+numberOfLines{2 / 3 / 4} max lines appear in the view of the textInput
+keyboardType && secureTextEntry for password textInputs
 */
