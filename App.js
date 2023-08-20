@@ -13,7 +13,9 @@ export default function App() {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.top} />
+        <View style={styles.top}>
+          <Text>Some Text</Text>
+        </View>
         <View style={styles.middle} />
         <View style={styles.bottom} />
       </View>
@@ -59,5 +61,13 @@ the style have many properties.
 onLayout: a function that called when the layout of the view changes,
 pointerEvents - This prop determines how the <View> component responds to touch events,
 accessible & accessibilityLabel,
- 
+*/
+/*
+Text Important props
+numberOfLines: Limits the number of the lines of the text displayed.
+ellipsizeMode: Specifies what happens if the text is too long for one line and does not fit in oneline.
+accessibilityRole: The role describes the purpose of an element within your app.
+onPress & onLongPress
+allowFontScaling: controls whether fonts should scale to respect the text size accessibilty settings.
+testId,
 */
