@@ -1,14 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.top} />
-      <View style={styles.middle} />
-      <View style={styles.bottom} />
-    </View>
+    <>
+      <View style={styles.container}>
+        <View style={styles.top} />
+        <View style={styles.middle} />
+        <View style={styles.bottom} />
+      </View>
+      <View pointerEvents="none">
+        <Button title="click Me" />
+      </View>
+    </>
   );
 }
 
@@ -43,6 +55,9 @@ const styles = StyleSheet.create({
 /*
 View important props
 style: A style object that defines the visual appearance of the view.
-this can include many properties.
-
+the style have many properties.
+onLayout: a function that called when the layout of the view changes,
+pointerEvents - This prop determines how the <View> component responds to touch events,
+accessible & accessibilityLabel,
+ 
 */
