@@ -42,5 +42,7 @@ const styles = StyleSheet.create({
 });
 /*
 View important props
-style, 
+style: A style object that defines the visual appearance of the view.
+this can include many properties.
+
 */
