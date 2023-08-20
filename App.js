@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hi From Emulator!</Text>
-      <StatusBar style="auto" />
+      <View style={styles.top} />
+      <View style={styles.middle} />
+      <View style={styles.bottom} />
     </View>
   );
 }
@@ -13,8 +15,32 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "space-between",
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 20,
+    margin: 10,
+  },
+  top: {
+    flex: 0.3,
+    backgroundColor: "grey",
+    borderWidth: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  middle: {
+    flex: 0.3,
+    backgroundColor: "beige",
+    borderWidth: 5,
+  },
+  bottom: {
+    flex: 0.3,
+    backgroundColor: "pink",
+    borderWidth: 5,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
 });
+/*
+View important props
+style, 
+*/
