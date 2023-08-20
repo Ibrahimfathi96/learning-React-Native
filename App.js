@@ -10,12 +10,24 @@ import {
   Image,
   Pressable,
   TouchableOpacity,
+  Switch,
 } from "react-native";
 import image from "./assets/adaptive-icon.png";
 export default function App() {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <>
       <View style={combinedStyles}>
+        <View>
+          <Switch
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={isEnabled ? "#f5dd4d" : "#f4f3f4"}
+            // ios_backgroundColor={"#3e3e3e"}
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
         <Text>Hi From React Native</Text>
         <Pressable
           style={baseStyles.button}
