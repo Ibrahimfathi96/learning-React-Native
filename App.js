@@ -8,13 +8,38 @@ import {
   TextInput,
   View,
   Image,
+  Pressable,
+  TouchableOpacity,
 } from "react-native";
 import image from "./assets/adaptive-icon.png";
 export default function App() {
   return (
-    <View style={combinedStyles}>
-      <Text>Hi From React Native</Text>
-    </View>
+    <>
+      <View style={combinedStyles}>
+        <Text>Hi From React Native</Text>
+        <Pressable
+          style={baseStyles.button}
+          onPress={() => console.log("Pressable")}
+        >
+          <Text>Press Me</Text>
+        </Pressable>
+        <TouchableOpacity
+          style={baseStyles.button}
+          onPress={() => console.log("TouchableOpacity")}
+        >
+          <Text>Press Me</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Button //uncustomizable button to customize button use pressable
+          onPress={() => console.log("Pressed")}
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+          disabled={false} //to disable pressing on the button
+        />
+      </View>
+    </>
   );
   // const [IsLoaded, setIsLoaded] = useState(false);
   // const [IsError, setIsError] = useState(false);
@@ -136,6 +161,12 @@ export default function App() {
 //stylesheet compose
 const isActive = true;
 const baseStyles = StyleSheet.create({
+  button: {
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: "#ddd",
+    margin: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
