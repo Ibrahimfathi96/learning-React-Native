@@ -7,9 +7,12 @@ import {
   Text,
   TextInput,
   View,
+  Image,
 } from "react-native";
-
+import image from "./assets/adaptive-icon.png";
 export default function App() {
+  const [IsLoaded, setIsLoaded] = useState(false);
+  const [IsError, setIsError] = useState(false);
   return (
     <>
       <View style={styles.container}>
@@ -21,7 +24,18 @@ export default function App() {
           </Text>
         </View>
         <View style={styles.middle}></View>
-        <View style={styles.bottom} />
+        <View style={styles.bottom}>
+          <Image
+            onLoad={() => setIsLoaded(true)}
+            onError={() => setIsError(true)}
+            source={{
+              uri: "https://image.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg",
+            }}
+            style={{ width: 150, height: 150 }}
+          />
+          <Text>{IsLoaded && "Image loaded"}</Text>
+          <Text>{!IsError && "Image Error"}</Text>
+        </View>
       </View>
       <View pointerEvents="none">
         <Button title="click Me" />
@@ -67,7 +81,7 @@ const styles = StyleSheet.create({
   },
 });
 /*
-View important props
+View important props <View></View>
 style: A style object that defines the visual appearance of the view.
 the style have many properties.
 onLayout: a function that called when the layout of the view changes,
@@ -75,11 +89,23 @@ pointerEvents - This prop determines how the <View> component responds to touch 
 accessible & accessibilityLabel,
 */
 /*
-Text Important props
+Text Important props  <Text></Text>
 numberOfLines: Limits the number of the lines of the text displayed.
 ellipsizeMode: Specifies what happens if the text is too long for one line and does not fit in oneline.
 accessibilityRole: The role describes the purpose of an element within your app.
 onPress & onLongPress
 allowFontScaling: controls whether fonts should scale to respect the text size accessibilty settings.
 testId,
+*/
+/*
+Image important props  <Image />
+***Note that for network and data images, 
+***you will need to manually specify the dimensions of your image!
+source={imageLocallyLinkFromAssets}
+source={{uri:""}} style={{width = 300, height = 300}}
+resizeMode,
+onLoad{()=>function} as onError
+defaultSource=> ignored in debug mode
+blurRaduis={3} local or url {require('imageLinkFromAssets')}
+accessibilityLabel"Image"
 */
