@@ -15,8 +15,12 @@ export default function App() {
       <View style={styles.container}>
         <View style={styles.top}>
           <Text>Some Text</Text>
+          <Text style={styles.baseText}>
+            I am bold
+            <Text style={styles.innerText}> and red</Text>
+          </Text>
         </View>
-        <View style={styles.middle} />
+        <View style={styles.middle}></View>
         <View style={styles.bottom} />
       </View>
       <View pointerEvents="none">
@@ -33,6 +37,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 20,
     margin: 10,
+  },
+  baseText: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  innerText: {
+    color: "red",
+    fontSize: 20,
   },
   top: {
     flex: 0.3,
