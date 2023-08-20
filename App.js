@@ -135,4 +135,14 @@ maxLength letters in the input
 multiline for the overflow text {true/false}\
 numberOfLines{2 / 3 / 4} max lines appear in the view of the textInput
 keyboardType && secureTextEntry for password textInputs
+autoCapitalized:Determines if the first letter of each word should 
+be capitalized.=>
+default"none" /  
+"words"All Words Capitalized In The / 
+"characters"  ALLCHARA /
+"sentences" All Sentences Caps /
+autoCorrect"true"
+onContentSizeChanges{(e)=>console.log(e.nativeEvent.content)}
+editable: "true" by default if false can focus and change in the textInput
+onSubmitEditing.
 */
