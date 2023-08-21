@@ -11,228 +11,47 @@ import {
   Pressable,
   TouchableOpacity,
   Switch,
-  FlatList,
-  RefreshControl,
-  SectionList,
 } from "react-native";
 import image from "./assets/adaptive-icon.png";
 export default function App() {
-  // const [data, setData] = useState(apiData);
-  // const [isRefresh, setIsRefresh] = useState(false);
-  const apiData = [
-    {
-      title: "Section One",
-      data: [
-        {
-          id: "1",
-          name: "First Item",
-        },
-        {
-          id: "2",
-          name: "Second Item",
-        },
-        {
-          id: "3",
-          name: "Third Item",
-        },
-        {
-          id: "4",
-          name: "4th Item",
-        },
-        {
-          id: "5",
-          name: "5th Item",
-        },
-        {
-          id: "6",
-          name: "6th Item",
-        },
-        {
-          id: "7",
-          name: "7th Item",
-        },
-        {
-          id: "8",
-          name: "8th Item",
-        },
-        {
-          id: "9",
-          name: "9th Item",
-        },
-        {
-          id: "10",
-          name: "10th Item",
-        },
-        {
-          id: "11",
-          name: "11th Item",
-        },
-        {
-          id: "12",
-          name: "12th Item",
-        },
-        {
-          id: "13",
-          name: "13th Item",
-        },
-      ],
-    },
-    {
-      title: "Section Two",
-      data: [
-        {
-          id: "14",
-          name: "14th Item",
-        },
-        {
-          id: "15",
-          name: "15th Item",
-        },
-        {
-          id: "16",
-          name: "16th Item",
-        },
-        {
-          id: "17",
-          name: "17th Item",
-        },
-        {
-          id: "18",
-          name: "18th Item",
-        },
-        {
-          id: "19",
-          name: "19th Item",
-        },
-        {
-          id: "20",
-          name: "20th Item",
-        },
-        {
-          id: "21",
-          name: "21th Item",
-        },
-        {
-          id: "22",
-          name: "22th Item",
-        },
-        {
-          id: "23",
-          name: "23th Item",
-        },
-        {
-          id: "24",
-          name: "24th Item",
-        },
-        {
-          id: "25",
-          name: "25th Item",
-        },
-        {
-          id: "26",
-          name: "26th Item",
-        },
-      ],
-    },
-  ];
-  // const refreshHandler = () => {
-  //   setIsRefresh(true);
-  //   setTimeout(() => {
-  //     setData(apiData);
-  //     setIsRefresh(false);
-  //   }, 1000);
-  // };
-  // const [isEnabled, setIsEnabled] = useState(false);
-  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
-    <View>
-      <SectionList
-        sections={apiData}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={{ fontSize: 30, textAlign: "center", paddingTop: 30 }}>
-            {title}
-          </Text>
-        )}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.title}>{item.name}</Text>
-          </View>
-        )}
-      />
-    </View>
-    // <View style={styles.container}>
-    //   <FlatList
-    //     data={data}
-    //     renderItem={({ item }) => (
-    //       <View style={styles.item}>
-    //         <Text style={styles.title}>{item.title}</Text>
-    //       </View>
-    //     )}
-    //     keyExtractor={(item) => String(item.id)}
-    //     ListHeaderComponent={() => (
-    //       <View style={{ paddingVertical: 30 }}>
-    //         <Text style={[styles.title, { color: "#000" }]}>
-    //           List Header Component
-    //         </Text>
-    //       </View>
-    //     )}
-    //     ListFooterComponent={() => (
-    //       <View style={{ paddingVertical: 30 }}>
-    //         <Text style={[styles.title, { color: "#000" }]}>
-    //           List Footer Component
-    //         </Text>
-    //       </View>
-    //     )}
-    //     ItemSeparatorComponent={() => (
-    //       <Text style={{ textAlign: "center", fontSize: 30 }}>Center</Text>
-    //     )}
-    //     onEndReached={() => console.log("End")}
-    //     refreshing={isRefresh}
-    //     onRefresh={refreshHandler}
-    //     refreshControl={
-    //       <RefreshControl
-    //         refreshing={isRefresh}
-    //         onRefresh={refreshHandler}
-    //       />
-    //     }
-    //   />
-    // </View>
-    // <>
-    //   <View style={combinedStyles}>
-    //     <View>
-    //       <Switch
-    //         trackColor={{ false: "#767577", true: "#81b0ff" }}
-    //         thumbColor={isEnabled ? "#f5dd4d" : "#f4f3f4"}
-    //         // ios_backgroundColor={"#3e3e3e"}
-    //         onValueChange={toggleSwitch}
-    //         value={isEnabled}
-    //       />
-    //     </View>
-    //     <Text>Hi From React Native</Text>
-    //     <Pressable
-    //       style={baseStyles.button}
-    //       onPress={() => console.log("Pressable")}
-    //     >
-    //       <Text>Press Me</Text>
-    //     </Pressable>
-    //     <TouchableOpacity
-    //       style={baseStyles.button}
-    //       onPress={() => console.log("TouchableOpacity")}
-    //     >
-    //       <Text>Press Me</Text>
-    //     </TouchableOpacity>
-    //   </View>
-    //   <View>
-    //     <Button //uncustomizable button to customize button use pressable
-    //       onPress={() => console.log("Pressed")}
-    //       title="Learn More"
-    //       color="#841584"
-    //       accessibilityLabel="Learn more about this purple button"
-    //       disabled={false} //to disable pressing on the button
-    //     />
-    //   </View>
-    // </>
+    <>
+      <View style={combinedStyles}>
+        <View>
+          <Switch
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={isEnabled ? "#f5dd4d" : "#f4f3f4"}
+            // ios_backgroundColor={"#3e3e3e"}
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
+        <Text>Hi From React Native</Text>
+        <Pressable
+          style={baseStyles.button}
+          onPress={() => console.log("Pressable")}
+        >
+          <Text>Press Me</Text>
+        </Pressable>
+        <TouchableOpacity
+          style={baseStyles.button}
+          onPress={() => console.log("TouchableOpacity")}
+        >
+          <Text>Press Me</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Button //uncustomizable button to customize button use pressable
+          onPress={() => console.log("Pressed")}
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+          disabled={false} //to disable pressing on the button
+        />
+      </View>
+    </>
   );
   // const [IsLoaded, setIsLoaded] = useState(false);
   // const [IsError, setIsError] = useState(false);
@@ -351,92 +170,41 @@ export default function App() {
   // </>
   // );
 }
-const styles = StyleSheet.create({
+//stylesheet compose
+const isActive = true;
+const baseStyles = StyleSheet.create({
+  button: {
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: "#ddd",
+    margin: 10,
+  },
   container: {
     flex: 1,
-    backgroundColor: "grey",
-    alignItems: "center",
+    backgroundColor: "#fff",
     justifyContent: "center",
-  },
-  item: {
-    backgroundColor: "#000",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    borderRadius: 20,
-  },
-  title: {
-    fontSize: 30,
-    textAlign: "center",
-    color: "white",
+    alignItems: "center",
+    borderWidth: 1,
   },
 });
-//stylesheet compose
-// const isActive = true;
-// const baseStyles = StyleSheet.create({
-//   button: {
-//     padding: 20,
-//     borderRadius: 10,
-//     backgroundColor: "#ddd",
-//     margin: 10,
-//   },
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     borderWidth: 1,
-//   },
-// });
-// const activeStyles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "green",
-//     borderWidth: 1,
-//   },
-// });
-// const inActiveStyles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "red",
-//     borderWidth: 1,
-//   },
-// });
-// const combinedStyles = StyleSheet.compose(
-//   baseStyles.container,
-//   isActive ? activeStyles.container : inActiveStyles.container
-// );
-//Flatten StyleSheet
-// const page = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 24,
-//     alignItems: 'center',
-//   },
-//   text: {
-//     color: '#000',
-//     fontSize: 14,
-//     fontWeight: 'bold',
-//   },
-//   code: {
-//     marginTop: 12,
-//     padding: 12,
-//     borderRadius: 8,
-//     color: '#666',
-//     backgroundColor: '#eaeaea',
-//   },
-// });
-
-// const typography = StyleSheet.create({
-//   header: {
-//     color: '#61dafb',
-//     fontSize: 30,
-//     marginBottom: 36,
-//   },
-// });
-
-// const flattenStyle = StyleSheet.flatten([page.text, typography.header]);
-
+const activeStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "green",
+    borderWidth: 1,
+  },
+});
+const inActiveStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "red",
+    borderWidth: 1,
+  },
+});
+const combinedStyles = StyleSheet.compose(
+  baseStyles.container,
+  isActive ? activeStyles.container : inActiveStyles.container
+);
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
@@ -493,7 +261,7 @@ testId,
 */
 /*
 Image important props  <Image />
-***Note that for network and data images, 
+***Note that for network and data images,
 ***you will need to manually specify the dimensions of your image!
 source={imageLocallyLinkFromAssets}
 source={{uri:""}} style={{width = 300, height = 300}}
@@ -505,18 +273,18 @@ accessibilityLabel"Image"
 */
 /*
 TextInput Important Props  <TextInput><TextInput/>
-value:"text" cannot change it 
-defaultValue: can change it 
+value:"text" cannot change it
+defaultValue: can change it
 placeHolder & placeHolderTextColor
 onChangText, OnBlue Vs OnFocus
 maxLength letters in the input
 multiline for the overflow text {true/false}\
 numberOfLines{2 / 3 / 4} max lines appear in the view of the textInput
 keyboardType && secureTextEntry for password textInputs
-autoCapitalized:Determines if the first letter of each word should 
+autoCapitalized:Determines if the first letter of each word should
 be capitalized.=>
-default"none" /  
-"words"All Words Capitalized In The / 
+default"none" /
+"words"All Words Capitalized In The /
 "characters"  ALLCHARA /
 "sentences" All Sentences Caps /
 autoCorrect"true"
@@ -526,8 +294,6 @@ onSubmitEditing.
 */
 /*
 ScrollView Important Props  <ScrollView></ScrollView>
-**renders all its react child components at once, 
-but this has a performance downside.
 contentContainerStyle
 horizontal: to set the scroll to be horizontal
 showsVerticalScrollIndicator: shows vertical scrollbar"boolean"
