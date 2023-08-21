@@ -1,55 +1,79 @@
-import { useRef, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  DrawerLayoutAndroid,
+  PermissionsAndroid,
+  Button,
+  ToastAndroid,
 } from "react-native";
 export default function App() {
-  const [drawerPosition, setDrawerPosition] = useState("left");
-  const drawerRef = useRef(null);
+  const showToast = () => {
+    ToastAndroid.show("A pikachu appeared nearby !", ToastAndroid.SHORT);
+  };
+
+  const showToastWithGravity = () => {
+    ToastAndroid.showWithGravity(
+      "All Your Base Are Belong To Us",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
+
+  const showToastWithGravityAndOffset = () => {
+    ToastAndroid.showWithGravityAndOffset(
+      "A wild toast appeared!",
+      ToastAndroid.LONG,
+      ToastAndroid.BOTTOM,
+      25,
+      50
+    );
+  };
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: "Cool Photo App Camera Permission",
+          message:
+            "Cool Photo App needs access to your camera " +
+            "so you can take awesome pictures.",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK",
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("You can use the camera");
+      } else {
+        console.log("Camera permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
   return (
-    <DrawerLayoutAndroid
-      renderNavigationView={() => (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <TouchableOpacity
-            title="Close Drawer"
-            style={styles.button}
-            onPress={() => drawerRef.current.closeDrawer()}
-          >
-            <Text style={{ textAlign: "center" }}>Close Drawer</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      drawerPosition={drawerPosition}
-      drawerWidth={350}
-      ref={drawerRef}
-    >
-      <View style={styles.container}>
-        <TouchableOpacity
-          title="Change Position"
-          style={styles.button}
-          onPress={() => {
-            drawerPosition === "left"
-              ? setDrawerPosition("right")
-              : setDrawerPosition("left");
-          }}
-        >
-          <Text style={{ textAlign: "center" }}>Change Position</Text>
-        </TouchableOpacity>
-        <View style={{ height: 10, backgroundColor: "white" }}></View>
-        <TouchableOpacity
-          title="Open Drawer"
-          style={styles.button}
-          onPress={() => drawerRef.current.openDrawer()}
-        >
-          <Text style={{ textAlign: "center" }}>Open Drawer</Text>
-        </TouchableOpacity>
-      </View>
-    </DrawerLayoutAndroid>
+    <View style={styles.container}>
+      <TouchableOpacity
+        title="request permissions"
+        style={styles.button}
+        onPress={requestCameraPermission}
+      >
+        <Text style={{ textAlign: "center" }}>Try permissions</Text>
+      </TouchableOpacity>
+      <View style={{ height: 20 }}></View>
+      <Button title="Toggle Toast" onPress={() => showToast()} />
+      <View style={{ height: 20 }}></View>
+      <Button
+        title="Toggle Toast With Gravity"
+        onPress={() => showToastWithGravity()}
+      />
+      <View style={{ height: 20 }}></View>
+      <Button
+        title="Toggle Toast With Gravity & Offset"
+        onPress={() => showToastWithGravityAndOffset()}
+      />
+    </View>
   );
 }
 const styles = StyleSheet.create({
