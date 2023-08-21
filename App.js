@@ -11,47 +11,149 @@ import {
   Pressable,
   TouchableOpacity,
   Switch,
+  FlatList,
+  RefreshControl,
 } from "react-native";
 import image from "./assets/adaptive-icon.png";
 export default function App() {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [data, setData] = useState(apiData);
+  const [isRefresh, setIsRefresh] = useState(false);
+  const apiData = [
+    {
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abdb28ba",
+      title: "First Item",
+    },
+    {
+      id: "3ac68afc-c605-48d3-a4f8-fbd91daa97f63",
+      title: "Second Item",
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-145571e2d9d72",
+      title: "Third Item",
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-145571ed29d721",
+      title: "4th Item",
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-145571ed2d9d722",
+      title: "5th Item",
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-145571e2d9d723",
+      title: "6th Item",
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-14557e1de29d72",
+      title: "7th Item",
+    },
+    {
+      id: "58694a0f-3da1-47d1f-dbd96-14557d1e29d72",
+      title: "8th Item",
+    },
+    {
+      id: "58694a0f-3da1-47d1f-bdd96-14557d1e29d72",
+      title: "9th Item",
+    },
+    {
+      id: "58694a0f-3da1-471fff-bd96-14557dd1e29d72",
+      title: "10th Item",
+    },
+    {
+      id: "58694a0f-3deea1-471ssf-bd96-14557d1e29d72",
+      title: "11th Item",
+    },
+    {
+      id: "58694a0ddf-3da1-471f-bd96-14d5571e29d72",
+      title: "12th Item",
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-1d45571e29d72",
+      title: "13th Item",
+    },
+  ];
+  const refreshHandler = () => {
+    setIsRefresh(true);
+    setTimeout(() => {
+      setData(apiData);
+      setIsRefresh(false);
+    }, 1000);
+  };
+  // const [isEnabled, setIsEnabled] = useState(false);
+  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
-    <>
-      <View style={combinedStyles}>
-        <View>
-          <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isEnabled ? "#f5dd4d" : "#f4f3f4"}
-            // ios_backgroundColor={"#3e3e3e"}
-            onValueChange={toggleSwitch}
-            value={isEnabled}
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            <Text style={styles.title}>{item.title}</Text>
+          </View>
+        )}
+        keyExtractor={(item) => String(item.id)}
+        ListHeaderComponent={() => (
+          <View style={{ paddingVertical: 30 }}>
+            <Text style={[styles.title, { color: "#000" }]}>
+              List Header Component
+            </Text>
+          </View>
+        )}
+        ListFooterComponent={() => (
+          <View style={{ paddingVertical: 30 }}>
+            <Text style={[styles.title, { color: "#000" }]}>
+              List Footer Component
+            </Text>
+          </View>
+        )}
+        ItemSeparatorComponent={() => (
+          <Text style={{ textAlign: "center", fontSize: 30 }}>Center</Text>
+        )}
+        onEndReached={() => console.log("End")}
+        refreshing={isRefresh}
+        onRefresh={refreshHandler}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefresh}
+            onRefresh={refreshHandler}
           />
-        </View>
-        <Text>Hi From React Native</Text>
-        <Pressable
-          style={baseStyles.button}
-          onPress={() => console.log("Pressable")}
-        >
-          <Text>Press Me</Text>
-        </Pressable>
-        <TouchableOpacity
-          style={baseStyles.button}
-          onPress={() => console.log("TouchableOpacity")}
-        >
-          <Text>Press Me</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <Button //uncustomizable button to customize button use pressable
-          onPress={() => console.log("Pressed")}
-          title="Learn More"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-          disabled={false} //to disable pressing on the button
-        />
-      </View>
-    </>
+        }
+      />
+    </View>
+    // <>
+    //   <View style={combinedStyles}>
+    //     <View>
+    //       <Switch
+    //         trackColor={{ false: "#767577", true: "#81b0ff" }}
+    //         thumbColor={isEnabled ? "#f5dd4d" : "#f4f3f4"}
+    //         // ios_backgroundColor={"#3e3e3e"}
+    //         onValueChange={toggleSwitch}
+    //         value={isEnabled}
+    //       />
+    //     </View>
+    //     <Text>Hi From React Native</Text>
+    //     <Pressable
+    //       style={baseStyles.button}
+    //       onPress={() => console.log("Pressable")}
+    //     >
+    //       <Text>Press Me</Text>
+    //     </Pressable>
+    //     <TouchableOpacity
+    //       style={baseStyles.button}
+    //       onPress={() => console.log("TouchableOpacity")}
+    //     >
+    //       <Text>Press Me</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    //   <View>
+    //     <Button //uncustomizable button to customize button use pressable
+    //       onPress={() => console.log("Pressed")}
+    //       title="Learn More"
+    //       color="#841584"
+    //       accessibilityLabel="Learn more about this purple button"
+    //       disabled={false} //to disable pressing on the button
+    //     />
+    //   </View>
+    // </>
   );
   // const [IsLoaded, setIsLoaded] = useState(false);
   // const [IsError, setIsError] = useState(false);
@@ -170,41 +272,92 @@ export default function App() {
   // </>
   // );
 }
-//stylesheet compose
-const isActive = true;
-const baseStyles = StyleSheet.create({
-  button: {
-    padding: 20,
-    borderRadius: 10,
-    backgroundColor: "#ddd",
-    margin: 10,
-  },
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
+    backgroundColor: "grey",
     alignItems: "center",
-    borderWidth: 1,
+    justifyContent: "center",
+  },
+  item: {
+    backgroundColor: "#000",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 20,
+  },
+  title: {
+    fontSize: 30,
+    textAlign: "center",
+    color: "white",
   },
 });
-const activeStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "green",
-    borderWidth: 1,
-  },
-});
-const inActiveStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "red",
-    borderWidth: 1,
-  },
-});
-const combinedStyles = StyleSheet.compose(
-  baseStyles.container,
-  isActive ? activeStyles.container : inActiveStyles.container
-);
+//stylesheet compose
+// const isActive = true;
+// const baseStyles = StyleSheet.create({
+//   button: {
+//     padding: 20,
+//     borderRadius: 10,
+//     backgroundColor: "#ddd",
+//     margin: 10,
+//   },
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     borderWidth: 1,
+//   },
+// });
+// const activeStyles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "green",
+//     borderWidth: 1,
+//   },
+// });
+// const inActiveStyles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "red",
+//     borderWidth: 1,
+//   },
+// });
+// const combinedStyles = StyleSheet.compose(
+//   baseStyles.container,
+//   isActive ? activeStyles.container : inActiveStyles.container
+// );
+//Flatten StyleSheet
+// const page = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 24,
+//     alignItems: 'center',
+//   },
+//   text: {
+//     color: '#000',
+//     fontSize: 14,
+//     fontWeight: 'bold',
+//   },
+//   code: {
+//     marginTop: 12,
+//     padding: 12,
+//     borderRadius: 8,
+//     color: '#666',
+//     backgroundColor: '#eaeaea',
+//   },
+// });
+
+// const typography = StyleSheet.create({
+//   header: {
+//     color: '#61dafb',
+//     fontSize: 30,
+//     marginBottom: 36,
+//   },
+// });
+
+// const flattenStyle = StyleSheet.flatten([page.text, typography.header]);
+
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
@@ -294,6 +447,8 @@ onSubmitEditing.
 */
 /*
 ScrollView Important Props  <ScrollView></ScrollView>
+**renders all its react child components at once, 
+but this has a performance downside.
 contentContainerStyle
 horizontal: to set the scroll to be horizontal
 showsVerticalScrollIndicator: shows vertical scrollbar"boolean"
