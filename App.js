@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BackHandler, View, Alert, Text } from "react-native";
+import { BackHandler, View, Alert } from "react-native";
 export default function App() {
   useEffect(() => {
     const backAction = () => {
@@ -21,9 +21,5 @@ export default function App() {
 
     return () => backHandler.remove();
   }, []);
-  return (
-    <View>
-      <Text>HIIIII</Text>
-    </View>
-  );
+  return <View></View>;
 }
