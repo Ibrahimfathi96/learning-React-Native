@@ -13,112 +13,191 @@ import {
   Switch,
   FlatList,
   RefreshControl,
+  SectionList,
 } from "react-native";
 import image from "./assets/adaptive-icon.png";
 export default function App() {
-  const [data, setData] = useState(apiData);
-  const [isRefresh, setIsRefresh] = useState(false);
+  // const [data, setData] = useState(apiData);
+  // const [isRefresh, setIsRefresh] = useState(false);
   const apiData = [
     {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abdb28ba",
-      title: "First Item",
+      title: "Section One",
+      data: [
+        {
+          id: "1",
+          name: "First Item",
+        },
+        {
+          id: "2",
+          name: "Second Item",
+        },
+        {
+          id: "3",
+          name: "Third Item",
+        },
+        {
+          id: "4",
+          name: "4th Item",
+        },
+        {
+          id: "5",
+          name: "5th Item",
+        },
+        {
+          id: "6",
+          name: "6th Item",
+        },
+        {
+          id: "7",
+          name: "7th Item",
+        },
+        {
+          id: "8",
+          name: "8th Item",
+        },
+        {
+          id: "9",
+          name: "9th Item",
+        },
+        {
+          id: "10",
+          name: "10th Item",
+        },
+        {
+          id: "11",
+          name: "11th Item",
+        },
+        {
+          id: "12",
+          name: "12th Item",
+        },
+        {
+          id: "13",
+          name: "13th Item",
+        },
+      ],
     },
     {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91daa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e2d9d72",
-      title: "Third Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571ed29d721",
-      title: "4th Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571ed2d9d722",
-      title: "5th Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e2d9d723",
-      title: "6th Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-14557e1de29d72",
-      title: "7th Item",
-    },
-    {
-      id: "58694a0f-3da1-47d1f-dbd96-14557d1e29d72",
-      title: "8th Item",
-    },
-    {
-      id: "58694a0f-3da1-47d1f-bdd96-14557d1e29d72",
-      title: "9th Item",
-    },
-    {
-      id: "58694a0f-3da1-471fff-bd96-14557dd1e29d72",
-      title: "10th Item",
-    },
-    {
-      id: "58694a0f-3deea1-471ssf-bd96-14557d1e29d72",
-      title: "11th Item",
-    },
-    {
-      id: "58694a0ddf-3da1-471f-bd96-14d5571e29d72",
-      title: "12th Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-1d45571e29d72",
-      title: "13th Item",
+      title: "Section Two",
+      data: [
+        {
+          id: "14",
+          name: "14th Item",
+        },
+        {
+          id: "15",
+          name: "15th Item",
+        },
+        {
+          id: "16",
+          name: "16th Item",
+        },
+        {
+          id: "17",
+          name: "17th Item",
+        },
+        {
+          id: "18",
+          name: "18th Item",
+        },
+        {
+          id: "19",
+          name: "19th Item",
+        },
+        {
+          id: "20",
+          name: "20th Item",
+        },
+        {
+          id: "21",
+          name: "21th Item",
+        },
+        {
+          id: "22",
+          name: "22th Item",
+        },
+        {
+          id: "23",
+          name: "23th Item",
+        },
+        {
+          id: "24",
+          name: "24th Item",
+        },
+        {
+          id: "25",
+          name: "25th Item",
+        },
+        {
+          id: "26",
+          name: "26th Item",
+        },
+      ],
     },
   ];
-  const refreshHandler = () => {
-    setIsRefresh(true);
-    setTimeout(() => {
-      setData(apiData);
-      setIsRefresh(false);
-    }, 1000);
-  };
+  // const refreshHandler = () => {
+  //   setIsRefresh(true);
+  //   setTimeout(() => {
+  //     setData(apiData);
+  //     setIsRefresh(false);
+  //   }, 1000);
+  // };
   // const [isEnabled, setIsEnabled] = useState(false);
   // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
+    <View>
+      <SectionList
+        sections={apiData}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={{ fontSize: 30, textAlign: "center", paddingTop: 30 }}>
+            {title}
+          </Text>
+        )}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.title}>{item.name}</Text>
           </View>
         )}
-        keyExtractor={(item) => String(item.id)}
-        ListHeaderComponent={() => (
-          <View style={{ paddingVertical: 30 }}>
-            <Text style={[styles.title, { color: "#000" }]}>
-              List Header Component
-            </Text>
-          </View>
-        )}
-        ListFooterComponent={() => (
-          <View style={{ paddingVertical: 30 }}>
-            <Text style={[styles.title, { color: "#000" }]}>
-              List Footer Component
-            </Text>
-          </View>
-        )}
-        ItemSeparatorComponent={() => (
-          <Text style={{ textAlign: "center", fontSize: 30 }}>Center</Text>
-        )}
-        onEndReached={() => console.log("End")}
-        refreshing={isRefresh}
-        onRefresh={refreshHandler}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefresh}
-            onRefresh={refreshHandler}
-          />
-        }
       />
     </View>
+    // <View style={styles.container}>
+    //   <FlatList
+    //     data={data}
+    //     renderItem={({ item }) => (
+    //       <View style={styles.item}>
+    //         <Text style={styles.title}>{item.title}</Text>
+    //       </View>
+    //     )}
+    //     keyExtractor={(item) => String(item.id)}
+    //     ListHeaderComponent={() => (
+    //       <View style={{ paddingVertical: 30 }}>
+    //         <Text style={[styles.title, { color: "#000" }]}>
+    //           List Header Component
+    //         </Text>
+    //       </View>
+    //     )}
+    //     ListFooterComponent={() => (
+    //       <View style={{ paddingVertical: 30 }}>
+    //         <Text style={[styles.title, { color: "#000" }]}>
+    //           List Footer Component
+    //         </Text>
+    //       </View>
+    //     )}
+    //     ItemSeparatorComponent={() => (
+    //       <Text style={{ textAlign: "center", fontSize: 30 }}>Center</Text>
+    //     )}
+    //     onEndReached={() => console.log("End")}
+    //     refreshing={isRefresh}
+    //     onRefresh={refreshHandler}
+    //     refreshControl={
+    //       <RefreshControl
+    //         refreshing={isRefresh}
+    //         onRefresh={refreshHandler}
+    //       />
+    //     }
+    //   />
+    // </View>
     // <>
     //   <View style={combinedStyles}>
     //     <View>
