@@ -1,27 +1,25 @@
-import { View, StyleSheet, ActivityIndicator } from "react-native";
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <ActivityIndicator animating={true} size={30} color={"black"} />
-    </View>
-  );
-}
+import React from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+
+const App = () => (
+  <View style={[styles.container, styles.horizontal]}>
+    <ActivityIndicator />
+    <ActivityIndicator size="large" />
+    <ActivityIndicator size="small" color="#0000ff" />
+    <ActivityIndicator size="large" color="#00ff00" />
+  </View>
+);
+
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    marginTop: 80,
-  },
-  button: {
     flex: 1,
-    padding: 12,
-    margin: 12,
     justifyContent: "center",
-    alignContent: "center",
-    textAlign: "center",
-    backgroundColor: "grey",
-    width: 150,
-    borderRadius: 20,
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
   },
 });
+
+export default App;
