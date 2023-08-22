@@ -1,53 +1,35 @@
 import React, { useRef } from "react";
 import {
-  Animated,
-  Text,
   View,
   StyleSheet,
-  Button,
-  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  Animated,
 } from "react-native";
 
 const App = () => {
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 5000,
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const pressHandler = () => {
+    Animated.decay(animatedValue, {
+      velocity: 0.5,
+      deceleration: 0.98,
       useNativeDriver: true,
     }).start();
   };
-
-  const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 3 seconds
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 3000,
-      useNativeDriver: true,
-    }).start();
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
-      <Animated.View
-        style={[
-          styles.fadingContainer,
-          {
-            // Bind opacity to animated value
-            opacity: fadeAnim,
-          },
-        ]}
-      >
-        <Text style={styles.fadingText}>Fading View!</Text>
-      </Animated.View>
-      <View style={styles.buttonRow}>
-        <Button title="Fade In View" onPress={fadeIn} />
-        <Button title="Fade Out View" onPress={fadeOut} />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={pressHandler}>
+        <Text style={styles.buttonRow}>Start Animation</Text>
+        <Animated.View
+          style={[
+            styles.box,
+            {
+              transform: [{ translateY: animatedValue }],
+            },
+          ]}
+        ></Animated.View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -57,6 +39,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  box: {
+    width: 100,
+    height: 100,
+    margin: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "red",
+  },
   fadingContainer: {
     padding: 20,
     backgroundColor: "powderblue",
@@ -65,9 +55,14 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
   buttonRow: {
-    flexBasis: 100,
+    justifyContent: "center",
+    alignItems: "center",
     justifyContent: "space-evenly",
-    marginVertical: 16,
+    padding: 16,
+    fontSize: 18,
+    borderRadius: 26,
+    color: "white",
+    backgroundColor: "blue",
   },
 });
 
