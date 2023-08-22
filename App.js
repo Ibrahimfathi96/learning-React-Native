@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -9,26 +9,25 @@ import {
 
 const App = () => {
   const animatedValue = useRef(new Animated.Value(0)).current;
-  const pressHandler = () => {
-    Animated.decay(animatedValue, {
-      velocity: 0.5,
-      deceleration: 0.98,
+  useEffect(() => {
+    Animated.timing(animatedValue, {
+      toValue: 1,
+      duration: 3000,
       useNativeDriver: true,
+      delay: 1000,
     }).start();
-  };
+  }, [animatedValue]);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={pressHandler}>
-        <Text style={styles.buttonRow}>Start Animation</Text>
-        <Animated.View
-          style={[
-            styles.box,
-            {
-              transform: [{ translateY: animatedValue }],
-            },
-          ]}
-        ></Animated.View>
-      </TouchableOpacity>
+      <Animated.View
+        style={[
+          styles.box,
+          {
+            opacity: animatedValue,
+          },
+        ]}
+      ></Animated.View>
     </View>
   );
 };
