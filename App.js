@@ -9,25 +9,34 @@ import {
 
 const App = () => {
   const animatedValue = useRef(new Animated.Value(0)).current;
-  useEffect(() => {
-    Animated.timing(animatedValue, {
+  const pressHandler = () => {
+    Animated.spring(animatedValue, {
       toValue: 1,
-      duration: 3000,
+      friction: 2,
+      tension: 80,
       useNativeDriver: true,
-      delay: 1000,
     }).start();
-  }, [animatedValue]);
-
+  };
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.box,
-          {
-            opacity: animatedValue,
-          },
-        ]}
-      ></Animated.View>
+      <TouchableOpacity onPress={pressHandler}>
+        <Text style={styles.buttonRow}>Start Animation</Text>
+        <Animated.View
+          style={[
+            styles.box,
+            {
+              transform: [
+                {
+                  translateX: animatedValue.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 100],
+                  }),
+                },
+              ],
+            },
+          ]}
+        ></Animated.View>
+      </TouchableOpacity>
     </View>
   );
 };
