@@ -1,64 +1,45 @@
 import React from "react";
 import {
-  Image,
-  PixelRatio,
+  RefreshControl,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  View,
 } from "react-native";
 
-const size = 50;
-const cat = {
-  uri: "https://reactnative.dev/docs/assets/p_cat1.png",
-  width: size,
-  height: size,
+const App = () => {
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Text>Pull down to see RefreshControl indicator</Text>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
-const App = () => (
-  <ScrollView style={styles.scrollContainer}>
-    <View style={styles.container}>
-      <Text>Current Pixel Ratio is:</Text>
-      <Text style={styles.value}>{PixelRatio.get()}</Text>
-    </View>
-    <View style={styles.container}>
-      <Text>Current Font Scale is:</Text>
-      <Text style={styles.value}>{PixelRatio.getFontScale()}</Text>
-    </View>
-    <View style={styles.container}>
-      <Text>On this device images with a layout width of</Text>
-      <Text style={styles.value}>{size} px</Text>
-      <Image source={cat} />
-    </View>
-    <View style={styles.container}>
-      <Text>require images with a pixel width of</Text>
-      <Text style={styles.value}>
-        {PixelRatio.getPixelSizeForLayoutSize(size)} px
-      </Text>
-      <Image
-        source={cat}
-        style={{
-          width: PixelRatio.getPixelSizeForLayoutSize(size),
-          height: PixelRatio.getPixelSizeForLayoutSize(size),
-        }}
-      />
-    </View>
-  </ScrollView>
-);
-
 const styles = StyleSheet.create({
-  scrollContainer: {
+  container: {
     flex: 1,
   },
-  container: {
-    justifyContent: "center",
+  scrollView: {
+    flex: 1,
+    backgroundColor: "pink",
     alignItems: "center",
-    marginTop: 60,
-  },
-  value: {
-    fontSize: 24,
-    marginBottom: 12,
-    marginTop: 4,
+    justifyContent: "center",
   },
 });
 
