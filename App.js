@@ -8,31 +8,31 @@ import {
 } from "react-native";
 
 const App = () => {
-  const animatedValue = useRef(new Animated.Value(0)).current;
-  const pressHandler = () => {
-    Animated.spring(animatedValue, {
-      toValue: 1,
-      friction: 2,
-      tension: 80,
-      useNativeDriver: true,
-    }).start();
+  const opacityValue = useRef(new Animated.Value(0)).current;
+  const positionValue = useRef(new Animated.ValueXY({ x: -100, y: 0 })).current;
+  const startAnimation = () => {
+    Animated.sequence([
+      Animated.timing(opacityValue, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.spring(positionValue, {
+        toValue: { x: 100, y: 50 },
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={pressHandler}>
+      <TouchableOpacity onPress={startAnimation}>
         <Text style={styles.buttonRow}>Start Animation</Text>
         <Animated.View
           style={[
             styles.box,
             {
-              transform: [
-                {
-                  translateX: animatedValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 100],
-                  }),
-                },
-              ],
+              opacity: opacityValue,
+              transform: positionValue.getTranslateTransform(),
             },
           ]}
         ></Animated.View>
