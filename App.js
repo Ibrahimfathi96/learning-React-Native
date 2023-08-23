@@ -11,7 +11,7 @@ const App = () => {
   const opacityValue = useRef(new Animated.Value(0)).current;
   const positionValue = useRef(new Animated.ValueXY({ x: -100, y: 0 })).current;
   const startAnimation = () => {
-    Animated.parallel([
+    Animated.stagger(1000, [
       Animated.timing(opacityValue, {
         toValue: 1,
         duration: 1000,
