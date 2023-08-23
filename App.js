@@ -23,7 +23,11 @@ const App = () => {
       />
       <Button
         title="Open url"
-        onPress={() => Linking.openURL("https://expo.io")}
+        onPress={() =>
+          Linking.openURL("https://expo.io").catch((error) =>
+            console.log(error)
+          )
+        }
       />
     </View>
   );
