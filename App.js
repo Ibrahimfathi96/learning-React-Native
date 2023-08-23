@@ -1,36 +1,58 @@
-import { View, Button, Linking } from "react-native";
+import React from "react";
+import {
+  View,
+  KeyboardAvoidingView,
+  TextInput,
+  StyleSheet,
+  Text,
+  Platform,
+  TouchableWithoutFeedback,
+  Button,
+  Keyboard,
+} from "react-native";
 
-const App = () => {
+const KeyboardAvoidingComponent = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
     >
-      <Button
-        title="Send mail"
-        onPress={() => Linking.openURL("mailto: support@expo.io")}
-      />
-      <Button
-        title="Open Phone"
-        onPress={() => Linking.openURL("tel:+123456789")}
-      />
-      <Button
-        title="Open sms"
-        onPress={() => Linking.openURL("sms:+123456789")}
-      />
-      <Button
-        title="Open url"
-        onPress={() =>
-          Linking.openURL("https://expo.io").catch((error) =>
-            console.log(error)
-          )
-        }
-      />
-    </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          <Text style={styles.header}>Header</Text>
+          <TextInput placeholder="Username" style={styles.textInput} />
+          <View style={styles.btnContainer}>
+            <Button title="Submit" onPress={() => null} />
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  inner: {
+    padding: 24,
+    flex: 1,
+    justifyContent: "space-around",
+  },
+  header: {
+    fontSize: 36,
+    marginBottom: 48,
+  },
+  textInput: {
+    height: 40,
+    borderColor: "#000000",
+    borderBottomWidth: 1,
+    marginBottom: 36,
+  },
+  btnContainer: {
+    backgroundColor: "white",
+    marginTop: 12,
+  },
+});
+
+export default KeyboardAvoidingComponent;
