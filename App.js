@@ -10,7 +10,7 @@ const useStyles = () => {
     },
     left: {
       backgroundColor: "pink",
-      width: width / 4,
+      width: width / 2,
     },
     right: {
       backgroundColor: "skyblue",
