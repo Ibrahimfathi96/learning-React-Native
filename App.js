@@ -8,20 +8,15 @@ import {
 } from "react-native";
 
 const App = () => {
-  const opacityValue = useRef(new Animated.Value(0)).current;
-  const positionValue = useRef(new Animated.ValueXY({ x: -100, y: 0 })).current;
+  const spinAnimated = useRef(new Animated.Value(0)).current;
   const startAnimation = () => {
-    Animated.stagger(1000, [
-      Animated.timing(opacityValue, {
+    Animated.loop(
+      Animated.timing(spinAnimated, {
         toValue: 1,
         duration: 1000,
         useNativeDriver: true,
-      }),
-      Animated.spring(positionValue, {
-        toValue: { x: 100, y: 50 },
-        useNativeDriver: true,
-      }),
-    ]).start();
+      })
+    ).start();
   };
   return (
     <View style={styles.container}>
@@ -31,8 +26,14 @@ const App = () => {
           style={[
             styles.box,
             {
-              opacity: opacityValue,
-              transform: positionValue.getTranslateTransform(),
+              transform: [
+                {
+                  rotate: spinAnimated.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ["0deg", "360deg"],
+                  }),
+                },
+              ],
             },
           ]}
         ></Animated.View>
